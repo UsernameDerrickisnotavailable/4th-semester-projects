@@ -1,0 +1,182 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsfonts, amsthm}
+\usepackage{tikz-cd}
+\usepackage{mathrsfs}
+\usepackage{ulem}
+\title{Quiver Representations}
+\begin{document}
+\maketitle
+\section*{Projective and Injective Representations}
+\textbf{Recall:}
+\begin{itemize}
+    \item : The Hom functor Hom$(M,-)$ is a covariant functor from any category $\mathcal{C}$ to the category of $k$-vector spaces. That is, it takes any object $X$ to the vector space Hom$(M,X)$(This is indeed a vector space as given as an exercise in ch 1 by Schiffler). Also, a morphism $f$ from $X$ to any other object $Y$ is taken to the map, say $f_*: \text{Hom}(M,X) \to \text{Hom}(M,Y)$
+    \item The Hom functor Hom$(-,M)$ is similar to the above functor, but is contravariant. That is it takes an object $X$ to Hom$(X,M)$ and it takes the morphism $f: X \to Y$ to the morphism $f_* : \text{Hom}(Y,M) \to \text{Hom}(X,M)$
+\end{itemize}
+
+    \textbf{Remark: } So there's this "universality" property that I haven't really studied formally, but the essence is that an object is universal if it is the "closest" that another object is coming to or going from. \\\textbf{Edit: So, a big no-no from me here. Projective objects are indeed NOT universal objects, and the universal property does not play any role here. It is only the lifting and extension property that is in play here. I have made plenty more mistakes regarding this in the following statements, where I call the lifts ``unique". This is not the case}
+
+ A \textit{projective} representation of a given finite quiver \textit{Q} is a representation $P$ such that the Hom functor Hom$(P,-)$ takes surjective morphisms to surjective morphisms. That is, if we have a morphism $g:X \twoheadrightarrow Y$ , then it is taken to the morphism $h: \text{Hom}(P,X) \twoheadrightarrow \text{Hom}(P,Y)$ which is again surjective.\\ In other words, given a surjective morphism $g$, and any other morphism from $P$ to $Y$, there will always exist a \sout{unique} morphism from $P$ to $X$. 
+
+ \[
+\begin{tikzcd}[row sep=huge, column sep=huge]
+&P \arrow[dl,dashed,"\exists g"'] \arrow[d,"h"]  \\ 
+X \arrow[r, "f"] &Y 
+\end{tikzcd}
+\]
+
+Here, $f_*$ is the map  $\text{Hom}(P,X) \to \text{Hom}(P,Y)$. So, $f_*(g)=f \circ g=h$. \\
+
+ In category theory, duality is a concept which relates properties of a category $\mathscr{C}$ to its opposite category $\mathscr{C}^\text{op}$. It is ``opposite" in the sense that the arrows or morphisms are reversed, and as a result the diagrams are flipped too.\\
+
+ So, dual to the concept of a projective representation, we have an \textit{injective} representation. It is a representation $I$ such that the Hom functor Hom$(-.I)$ takes injective morphisms to surjective morphisms. So, it takes an injection, say $f: X\hookrightarrow Y$ to the surjection $f_*:\text{Hom}(Y,I) \twoheadrightarrow\text{Hom}(X,I)$. In other words, if we have the injection $f$, and any other morphism $g:X \to I$, then there will exist a \sout{unique} morphism $h:Y \to I$. This can also be represented by the following diagram:\\
+
+ \[
+ \begin{tikzcd}[row sep=huge, column sep=huge]
+     X \arrow[r,"f"] \arrow[d,"g"]  &Y \arrow[dl,dashed, "\exists h"] \\
+     I
+     \end{tikzcd}
+ \]
+ \section*{20-03-2026: Prop 2.7,2.8,2.9,2.10, Theorem 2.11 and related corollaries}
+
+ \textbf{Proposition 2.7}:
+ \begin{enumerate}
+ \item \textit{Let $P$ and $P'$ be two representations of $Q$. Then} 
+ \[
+ P \oplus P' \; \textit{is projective} \iff P \; \textit{and } P' \: \textit{are projective}
+ \]
+ \item \textit{Let $I$ and $I'$ be two representations of $Q$. Then} 
+ \[
+ I \oplus I' \; \textit{is injective} \iff I \; \textit{and } I' \: \textit{are injective}
+ \]
+
+ \textit{Proof: } I guess I will do the proof of (2) since the proof of (1) is in the book.
+
+ $(\implies)$ Let $g:L \to M$ be injective. We want to show that $I$ and $I'$ are injective. Here, we will prove only for $I$ since the result is similar for $I'$. So, let $f:L \to I$ be any morphism in rep $Q$. We want to show that there exists a map $h':M \to I$ Then let us look at the following diagram: 
+\begin{center}
+ \begin{tikzcd}[row sep=huge,column sep=huge]
+L \arrow[r, "g"] \arrow[d, "f"] & M \arrow[ddl, "h"] \\
+I \arrow[d, "i_1"] \\
+I \oplus I' \arrow[u, "\pi_1", bend left=30]
+\end{tikzcd}
+\end{center}
+Since $I \oplus I'$ is injective, we have that $hg=i_1f$. So let us define $h' : M \to I $ by $h'=\pi_1h$. Now 
+\[
+h'g=\pi_1hg=\pi_1i_1f=1_If=f
+\]
+
+So, we have $h'g=f$ and thus the diagram commutes, and so $I$ is injective. 
+
+$(\impliedby)$ Let us take a morphism $f:L  \to I \oplus I'$. We want to define a map $M\to I\oplus I'$ meaningfully so that both of the following diagrams commute : 
+\begin{center}
+\begin{minipage}{0.45\textwidth}
+\centering
+\begin{tikzcd}[row sep=huge,column sep=huge]
+L \arrow[r, "g"] \arrow[d, "f"] & M \arrow[ddl, "h_1"] \\
+I \oplus I' \arrow[d, "\pi_1"] \\
+I \arrow[u, "i_1", bend left=30]
+\end{tikzcd}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+\centering
+\begin{tikzcd}[row sep=huge, column sep=huge]
+L \arrow[r, "g"] \arrow[d, "f"] & M \arrow[ddl, "h_2"] \\
+I \oplus I' \arrow[d, "\pi_2"] \\
+I' \arrow[u, "i_2", bend left=30]
+\end{tikzcd}
+\end{minipage}
+\end{center}
+
+Since $I$ is injective, we have that $\pi_1f=h_1g$ and similarly for $I'$, we have $\pi_2f=h_2g$. Now define $h=(h_1,h_2) : M \to I \oplus I'$ by $h(m)=h_1(m)+h_2(m)$. So $h'g=(h_1+h_2)g=h_1g+h_2g=\pi_1f+\pi_2f=(\pi_1+\pi_2)f=1_{I \oplus I'}f=f \qed$
+
+The above proposition is useful, since if we know the all of the indecomposable(projective or injective) representations, then we always will know their direct sums, which will always be projective or injective. I also think this is useful because the standard projective and injective representations $P(i)$ and $I(i)$ are well-studied(?). So, the next logical step would be to try to prove that $P(i)$ and $I(i)$ are indecomposable \\
+
+
+\textbf{Proposition 2.8: }: \textit{The representations $S(i),P(i)$ and $I(i)$ are indecomposable}\\
+\textit{Proof: } $S(i)$ is the simple representation with the one-dimensional vector space at vertex $i$, so it is obviously indecomposable.\\
+For $P(i)=(P(i)_j, \varphi_\alpha)$, we know that $P(i)_i=k$.\\
+Now, let $P(i)=M \oplus N$, where $M,N \in$ rep $Q$. Since $P(i)_i=M_i\oplus N_i$, without loss of generality, we may assume $P(i)=M_i=k$ and $N_i=0$. Now let us take another vertex $j$ such that $N_j \neq 0$, so that we may get $N\neq 0$. Now $P(i)_j$ has its basis as the set of all paths from $i$ to $j$. Let $c=(i\mid\beta_1,\beta_2,...\beta_t \mid j)$ be such a path. That is $c$ is a basis element of $P(i)_j$. Now let $\varphi_c=\varphi_{\beta_t}\varphi_{\beta_{t-1}}...\varphi_{\beta_1}$ be the composition of the linear maps in $P(i)_j$ along $c$. Since we have $P(i)=M \oplus N$, thus there is a linear map $\varphi_c$ from $P(i)_i$ to $P(i)_j$. More precisely,
+\[
+\varphi_c:M_i\oplus 0 \to M_j \oplus N_j
+\]
+Thus the unique basis element $e_i \in M_i$ is sent to a unique basis element $\varphi_c(e_i)\in M_j$. But $\varphi_c(e_i)=c$, which
+would mean that the basis element $c$ of $P(i)_j$ lies entirely in $M_j$, which would force $N_j$ to be zero, which is a contradiction.
+
+Now, for $I(i)$, we proceed in a similar way. We have $I(i)_i=k$ and so if $I(i)=M\oplus N,$ with $M,N$ being non-zero representations of $Q$, then $I(i)_i=M_i \oplus 0$, without loss of generality. Now, let $j$ be another vertex of $Q$ such that $N_j \neq 0$. $I(i)_j$ has the basis being all the paths from $j$ to $i$, and so let $c=(j\mid \alpha_1, \alpha_2,...\alpha_t\mid i)$ be such a path. Here, dual to the proof for $P(i)$, we have the map 
+\[
+\varphi_c:M_j \oplus N_j \to M_i \oplus 0
+\]
+By definition of $I(i)$, the element $c$ is sent to the basis element $e_i \in M_i$, where again, we arrive at a contradiction by having $N_j=0. \qed$\\
+
+
+\textbf{Proposition 2.9: }\textit{A representation of $Q$ is simple if and only if it is isomorphic to $S(i).$}
+\textit{Proof: } The reverse direction $(\impliedby)$ is clear, since
+$S(i)$'s are defined to be simple representations. Now we show the forward direction of the proof. Let $M=(M_i, \varphi_\alpha)$ be a representation of $Q$ which is simple. We want to show that it is isomorphic to $S(i)$ for some $i\in Q_0$, and to do that we need to show that $S(i)$ is a subrepresentation of $M$ so that we may obtain an injective morphism from $S(i)$ into $M$, and as such, we need to be careful in choosing a vertex. The first thing is that we do not want to have a non-zero map starting from the vertex $i$, because then $M$ would no longer have $S(i)$ as a subrepresentation. Also, if $i$ is a sink in the quiver, then we are through as $M$ would be equal to $S(i)$. We also want $M$ to be non-zero at $i$. This leads us to choosing the vertex as follows.\\
+Let $i\in Q_0$ and $M_i \neq 0$ and $M_j=0$ whenever there is an arrow $i \xrightarrow{\alpha}j$ in $Q$. This is also convenient because then if there were an arrow $l \xrightarrow{\beta}i$, then $M_l$ would be non-zero. Also, such a vertex $i$ exists because $Q$ does not have any oriented cycles. Here, we choose any linear injective map $f_i:S(i)_i \cong k \to M_i$ and extend it trivially to a morphism $f:S(i) \to M$ by letting $f_j=0$ if $i\neq j$. $f$ is also a morphism since the following diagram commutes for all arrows $l\xrightarrow{\alpha}i$ and $i \xrightarrow{\beta}j$ in $Q$
+\begin{center}
+\begin{tikzcd}[row sep=1in,column sep=1in]
+    0 \arrow[r] \arrow[d] & S(i)_i \arrow[r] \arrow[d,"f_i"] & 0 \arrow[d] \\
+    M_l \arrow[r,"\varphi_\alpha"] & M_i \arrow[r,"\varphi_\beta"] & 0 
+\end{tikzcd}
+\end{center}
+Since $f$ is injective, this means that $S(i)$ is a subrepresentation of $M$, and therefore either $M\cong S(i)$ or $M$ is not simple whenever there is an arrow $l\xrightarrow{\alpha}i \qed$
+ 
+ \end{enumerate}
+ \section[4]{Path Algebras}
+We first state the required definitions, lemmas, and concepts
+ \subsection*{Ring Theory concepts}
+ \textbf{Definition: } Let $R$ be a ring with unity. An subset $I$ of $R$ is said to be a right(left) ideal if $I$ is a subgroup of the additive group of $R$ and $ar\in I$(respectively $ra \in I$). $I$ is a two sided ideal if it is both a left and right-sided ideal. If $R$ is commutative, then every ideal is two sided. \\
+
+ $M$ is said to be a maximal ideal of $R$ if it is a proper ideal, and if for any other ideal $I$ such that $M\subset I\subset R$, then we must have either $M=I$ or $I=R$. \\
+
+ \textit{Examples}
+ \begin{enumerate}
+ \item 0 and $R$ are two sided ideals of $R$
+ \item The kernel of a ring homomorphism $f:R \to R'$ is a two sided ideal of $R$
+ \item The set $I=\Biggl\{\begin{pmatrix}a & 0 \\ b & 0 \end{pmatrix}\Bigg|a,b \in \mathbb{R}\bigg\}$ is a left-sided ideal of $M_2(\mathbb{R)}$
+ \item (2) is a two sided ideal as well as a maximal ideal of $\mathbb{Z}_6$
+ \item if $a\in R$, then $aR=\{ar \mid r\in R\}$ is a right ideal of R, called the right ideal generated by $a$. We define the left ideal generated by $a$ similarly, and the two sided ideal generated by $a$ is the set $RaR=\{ras \mid r,s\in R\}$
+ \item If we have a (left, right or two-sided) $I$ ideal of $R$, then the set 
+ \[
+ I^m=\{\sum_{i=1}^na_ib_i \mid a_i \in I\}
+ \]is a (left, right or two-sided) ideal of R, for some $n\in \mathbb{N}$
+ \end{enumerate}
+
+ If $I$ is an ideal of $R$, then addition and multiplication in the new ring $R/I$ is defined by
+ \[
+ (a+I)+(b+I)=(a+b+I) \quad  \text{and} \quad \\
+ (a+I)(b+I)=(ab+I)
+ \]
+
+ \textbf{Definition: } An ideal $I$ is called \textit{nilpotent} if there exists an $m \geq1$ such that $I^m=0$ 
+
+ \textbf{Important Result: } If $R$ is a commutative ring, then an ideal $M$ is maximal iff the quotient ring $R/M$ is a field. Also, a field $k$ has only the trivial ideals, 0 and itself 
+
+ \textbf{Definition: } The \textbf{Jacobson radical} (or simply radical) rad $R$ of $R$ is the intersection of all maximal  right ideals of $R$.\\
+ That is \[
+ \text {rad } R=\bigcap_{M maximal}M
+ \]
+
+ I looked up the definition of the radical on Wikipedia, which shows several definitions, which include definitions both for commutative and non-commutative rings. The above definition is for commutative rings, and if only the above definition is in the book, then I guess we will stick with that.
+
+ Now, if $R$ is simply a ring without 1, then maximal ideals may not necessarily exist, but if $R$ has 1, then Zorn's lemma guarantees the existence of at least one maximal ideal, so that we have rad $R \neq R$(Again, remember that a maximal ideal is a proper ideal).\\
+
+ The radical is supposedly an ``important" concept in the construction  of path algebras, as Schiffler wrote, so we have to keep track of the following equivalent results that involve rad $R$, and we state them in the form of a single lemma(The following lemma also shows that the intersection of all maximal right ideals is the same as the intersection of all maximal left ideals, so there is no notion of a ``left radical" or ``right radical"): 
+
+\textbf{Lemma: } \textit{Let $R$ be a ring with $1$, and let $a \in R$. Then the following are equivalent}: 
+
+\begin{enumerate}
+    \item $a\in \text{rad }R$
+    \item \textit{For all $b \in R$, the element $1-ab$ is right invertible}
+    \item \textit{For all $b \in R$, the element $1-ab$ has a two-sided inverse }
+    \item \textit{$a$ lies in the intersection of all maximal left ideals in $R$.}
+    \item \textit{For all $b \in R$, the element 1-ba is left invertible}
+    \item \textit{For all $b \in R$, the element 1-ba is invertible}.
+\end{enumerate}
+\newpage
+\textit{Proof: } We will prove by contradiction. Assume that $1-ab$ has no right inverse. That is there does not exist an element $c$ such that $(1-ab)c=1$. So here, we have a right ideal $(1-ab)R$, generated by $1-ab$. Take a maximal right ideal $I$ that contains the ideal $(1-ab)R$ and thus $1-ab$. By definition of radical, we have rad $R \subset I$. Thus, we have $a\in I$, which implies that $ab\in I$, since $I$ is a right ideal. Now $1=1-ab+ab \in I \implies 1 \in I\implies I=R$, which is a contradiction. So, $1-ab$ has a right inverse
+
+ 
+ 
+ 
+\end{document}

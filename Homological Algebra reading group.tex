@@ -1,0 +1,300 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{MnSymbol}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\newcommand{\cat}[1]{\mathscr{#1}}
+\title{Homological Algebra}
+
+\begin{document}
+
+\maketitle
+\section*{Section 1: Localisation}
+ So localisation is a concept where we want to create a new category by inverting a certain class of morphisms.
+ \subsection{Localisation of catgories}
+ Let $\cat{C}$ be a category and let us take $S$ to be a subclass the morphisms of $\cat{C}$. That is $S\subseteq \text{Hom}_\cat{C}(A,B)$. The $\textit{localisation}$ of $\cat{C}$ with respect to $S$ is a new category $\cat{C}[S^{-1}]$ together with a functor $Q: \cat{C} \to \cat{C}[S^{-1}]$ that satisfies the following :
+
+ \begin{itemize}
+     \item[[L1] For every morphism $\sigma$ in $\cat{C}$, we have that $Q\sigma$ is invertible in $\cat{C}[S^{-1}]$
+     \item[[L2]] If given another functor $F: \cat{C} \to \cat{D}$ such that $F\sigma$ is invertible, then we have a map $\Tilde{F}: \cat{C}[S^{-1}] \to \cat{D}$, which means that $F=\Tilde{F} \circ Q$, or in other words, $\Tilde{F}$ factors through $Q$
+ \end{itemize}
+
+ So here, $\cat{C}[S^{-1}]$ is a ``universal object" (correct me if I'm wrong pls), and it says in the text that localisation solves a universal problem, and the map is therefore unique upto isomorphism.\\
+
+ So far, we have defined what localisation means and have given two axioms for localisation, but we have not explicitly mentioned what the morphisms or objects are. So from here onward(I think), what is done here is that the functor $Q: \cat{C} \to \cat{C}[S^{-1}]$, the objects of the category and the morphisms are being described in more detail.\\
+
+ So first, we see that the objects of  $\cat{C}[S^{-1}]$ are the same objects as that of $\cat{C}$. Now we take a closer look at the morphisms of $\cat{C}[S^{-1}]$. Here, let us take the quiver with the vertices being the objects of $\cat{C}$,  and the class of arrows being the disjoint union Mor $\cat{C} \bigsqcup S^{-} $, where 
+ \[
+ S^{-}= \{\sigma^-:Y \to X \mid S \ni \sigma:X \to Y\}.
+ \]
+
+ Let $\mathcal{P}$ be the category of paths in this quiver, that is, a category where the objects are paths and morphisms are the composition/concatenation of paths whenever possible and denote that by $\circ_{\mathcal{P}}$. Now after the construction of this quiver, we can define the morphisms of $\cat{C}[S^{-1}]$ as the quotient of $\mathcal{P}$ modulo the following relations:
+
+ \begin{enumerate}
+     \item $\beta \circ_{\mathcal{P}}\alpha=\beta \circ \alpha$, where $\alpha,\beta$ are paths in the quiver, or we can also say that $\alpha$ and $\beta$ are ``composable" morphisms in Mor $\cat{C}$
+     \item $\text{id}_\mathcal{P}X=\text{id}_\cat{C}X$ for all $X \in$ Ob $\cat{C}$
+     \item $\sigma^- \circ_\mathcal{P}\sigma=\text{id}_\mathcal{P}X$ and $\sigma \circ_\mathcal{P} \sigma^-=\text{id}_\mathcal{P}Y$, for all $\sigma:X \to Y$ in $S$
+ \end{enumerate}
+
+ So, in other words, the composition in $\mathcal{P}$ induces the composition in $\cat{C}[S^{-1}]$. The functor $Q$ is the identity on the objects, but a morphism in $\cat{C}$ is sent to $\cat{C}[S^{-1}]$ via the following composition:
+ \[
+ \text{Mor }\cat{C} \xrightarrow{\text{inc}} \text{Mor }\cat{C} \;\sqcup \; S^- \xrightarrow{\text{inc}} \mathcal{P} \xrightarrow{\text{can}} \text{Mor } \cat{C}[S^{-1}]
+ \]
+
+ The above diagram(sequence?) is directly from the book, and I assume ``inc" means inclusion and ``can" means canonical? 
+
+ \textbf{Lemma 1.1.1: } \textit{For any category $\cat{D}$, the functor
+ \[
+ G: \text{Hom }(\cat{C}[S^{-1}],\cat{D}) \to \text{Hom }(\cat{C,D}), \quad F\mapsto F \circ Q
+ \]
+ is fully faithful and identifies Hom ($\cat{C}[S^{-1}],\cat{D}$) with the full subcategory of functors in Hom ($\cat{C,D}$) that makes morphisms in $S$ invertible}\\
+
+ Ok, so there is a lot to unpack from the above lemma, but like it says in the book, it is a more precise formulation of the properties of the functor $Q: \cat{C} \to \cat{C}[S^{-1}]$. The first thing to note is that the functor in the above lemma is a functor between two functor categories, where the objects are functors and the morphisms are natural transformations between the functors. I also think the above lemma combines the above L(1) and L(2) localisation axioms. It says ``identifies Hom ($\cat{C,D})$ that makes morphisms in $S$ invertible". So, the image of the functor $G$ is another functor that makes morphisms in $S$ invertible. So for example $F \circ Q$ makes morphisms in $S$ invertible. This is equivalent to L1(I think) in the sense that if we take $F$ to be the identity functor, and since it says``for any category $\cat{D}$", then we get simply $Q$, the localisation functor. In this case, $\cat{D}=\cat{C}[S^{-1}]$. Also, we can see L2 from the definition of the functor itself, where we can see the functor $\cat{C} \to \cat{D}$ factor through the functor $\cat{C}[S^{-1}] \to \cat{D}$.
+\begin{center}
+ \subsection*{Local Objects}
+\end{center}
+Let $\cat{C}$ be a category and let $S \subseteq$ Mor $\cat{C}$. We say that an object $Y\in \cat{C}$ is $S$-local if the map Hom$_\cat{C}(\sigma,Y)$ is bijective for all $\sigma \in S$. We denote by $S^\perp$ the full subcategory of $S$-local objects in $\cat{C}$.\\
+
+
+\textbf{Explanation: } Here, when it says Hom$_\cat{C}(\sigma,Y)$, I think it means the contravariant functor Hom $_\cat{C}( - ,Y)$, because I see this functor being used immediately in the next proposition. So I think ``bijective" means that it is fully faithful(?).
+
+\section*{Section 1.2: Calculus of fractions}
+Let $\cat{C}$ be a category and let $S\subseteq \text{Mor }\cat{C}$. If $S$ does something called "\textit{admit a class of left fractions}", then we can describe the localisation of $\cat{C}, \cat{C}[S^{-1}]$ even better. When we say $S$ admits a calculus of left fractions, we mean that $S$ has the following properties:
+\begin{enumerate}
+    \item[[LF1]] The set $S$ has the identity morphism $1_X$, and it is multiplicatively closed. That is, given two morphisms $\sigma_1,\sigma_2\in S$, we have $\sigma_1\circ \sigma_2\in S$ 
+    \item[[LF2]] If we have a pair of morphisms $X'\xleftarrow{\sigma}X\xrightarrow{f} Y$, with $\sigma \in S$, then it can be completed to the following diagram and it commutes
+    
+
+\begin{center}
+    \begin{tikzcd}[row sep=huge, column sep=huge]
+    X \arrow[r,"f"] \arrow[d,"\sigma"'] & Y \arrow[d,dashed,"\exists \tau"] \\
+    X' \arrow[r,dashed,"\exists g"'] & Y'
+    \end{tikzcd}
+\end{center} 
+with $\tau$ also being in $S$. Respectively, for the right fractions case, we have a pair of morphisms $X'\to Y'\xleftarrow{\tau}Y $ being completed to the following diagram: 
+\begin{center}
+    \begin{tikzcd}[row sep=huge, column sep=huge]
+    X \arrow[r,dashed,"\exists f"] \arrow[d,dashed,"\exists \sigma"'] & Y \arrow[d,"\tau"] \\
+    X' \arrow[r,"g"'] & Y'
+    \end{tikzcd}
+\end{center}
+\item[[LF3]] Let $f,g:X \to Y$ in $\cat{C}$. Then, if there is a $\sigma:X'\to X$ in $S$ such that $f\sigma =g\sigma $, then there is a $\tau:Y' \to Y$ such that $\tau f=\tau g$
+\end{enumerate}
+
+The class $S$ admits a \textit{calculus of right fractions} if it admits a calculus of left fractions in $\cat{C}^{\text{op}}$.
+So, the notion of \textit{left} and \textit{right} fractions are simply dual notions of each other. 
+
+So, for axiom [LF2], how we can distinguish between the left and right fractions is that if we fix the morphism on the left, then we have a left fraction, and if we fix the morphism on the right, then we have a right fraction.\\
+Also, the diagram in [LF2] is governed by a universal property known as the ``pushout" in the case of left fractions and ``pullback" in the case of right fractions. That is, the pullback of f and $\sigma$ is the triple $(Y',\tau,g)$, where if we have another triple $(Z,\tau',g')$, where $\tau':Y \to Z$ and $g':X' \to Z$, then there exists a map $h:Y' \to Z$ such that $\tau'=h\tau$ and $g'=hg$, and the following diagram commutes. 
+\begin{center}
+\begin{tikzpicture}
+
+
+\node (X') at (0,0) {$X'$};
+\node (Y') at (3,0) {$Y'$};
+\node (X) at (0,3) {$X$};
+\node (Y) at (3,3) {$Y$};
+\node (Z) at (5,-2.5) {$Z$};
+
+\draw[->] (X) -- node[above] {$f$} (Y);
+\draw[->] (X) -- node[left] {$\sigma$} (X');
+\draw[->] (X') -- node[below] {$g$} (Y');
+\draw[->] (Y) -- node[right] {$\tau$} (Y');
+
+\draw[->, bend right=20] (X') to node[below] {$g'$} (Z);
+\draw[->, bend left=20] (Y) to node[right] {$\tau'$} (Z);
+
+\draw[->, dashed] (Y') -- node[right] {$\exists h$} (Z);
+
+\end{tikzpicture}
+\end{center}
+Here, $Y'$ is the universal object.\\
+
+Similarly, in the pullback, that is, in the case of right fractions, we have the following diagram
+
+\begin{center}
+\begin{tikzpicture}
+
+
+\node (X') at (0,0) {$X'$};
+\node (Y') at (3,0) {$Y'$};
+\node (X) at (0,3) {$X$};
+\node (Y) at (3,3) {$Y$};
+\node (Z) at (-3,5.5) {$Z$};
+
+\draw[->] (X) -- node[above] {$f$} (Y);
+\draw[->] (X) -- node[left] {$\sigma$} (X');
+\draw[->] (X') -- node[below] {$g$} (Y');
+\draw[->] (Y) -- node[right] {$\tau$} (Y');
+
+\draw[->, bend left=20] (Z) to node[above] {$f'$} (Y);
+\draw[->, bend right=20] (Z) to node[left] {$\sigma'$} (X');
+
+\draw[->, dashed] (Z) -- node[right] {$\exists h$} (X);
+\end{tikzpicture}
+\end{center}
+Here $X$ is the universal object, and both $f'$ and $\sigma'$ factor through $h$\\
+In other words, for LF2, we can say that the class $S$ is closed under pushouts and pullbacks. \\
+
+Now, if $S$ admits a class of left fractions, then we have a new category $S^{-1}\cat{C}$, where the objects are the same as that of $\cat{C}$, and given a pair of objects $X$ and $Y$,then a \textbf{left fraction }$(\alpha,\sigma)$ is a pair of morphims $X\xrightarrow{\alpha}Y'\xleftarrow{\sigma}Y$ in $\cat{C}$ with $\sigma\in S$.\\
+
+So now, we have a new category $S^{-1}\cat{C}$, whose objects we know. So, the morphisms $X \to Y$ in $S^{-1}\cat{C}$ are the equivalence classes $[\alpha,\sigma]$, where $(\alpha_1,\sigma_1)$ and $(\alpha_2,\sigma_2)$ are in the same equivalence class if the following diagram commutes:
+\begin{center}
+    \begin{tikzpicture}
+        \node (Y'') at (0,0) {$Y_2$};
+        \node (Y''') at (0,3) {$Y_3$};
+        \node (Y) at (3,3) {$Y$};
+        \node (Y') at (0,6) {$Y_1$};
+        \node (X) at (-3,3) {$X$};
+
+        \draw[->] (Y'') -- (Y''');
+        \draw[->] (X) -- node[left] {$\alpha_3$} (Y'');
+        \draw[->] (X) -- node[left] {$\alpha_1$} (Y');
+        \draw[->] (X) -- node[above] {$\alpha_2$} (Y''');
+        \draw[->] (Y) -- node[right] {$\sigma_1$} (Y');
+        \draw[->] (Y) -- node[right] {$\sigma_3$} (Y'');
+        \draw[->] (Y) -- node[above] {$\sigma_2$} (Y''');
+        \draw[->] (Y') -- (Y''');
+    \end{tikzpicture}
+\end{center}
+
+\textbf{Note: } The reason we say that the fraction [$\alpha,\sigma$] is a morphism from $X$ to $Y$ is because $\sigma$ is invertible in the new category. So,in a sense, we can think of the equivalence class [$\alpha,\sigma$] to be the map $\sigma^{-1}\alpha$, which would indeed be a map from $X$ to $Y$. For clarity, the diagram $X\xrightarrow{\alpha}Y'\xleftarrow{\sigma}Y$ becomes $X\xrightarrow{\alpha}Y'\xrightarrow{\sigma^{-1}}Y$. This element $\alpha\sigma^{-1}$ looks similar again to a ``fraction" $\alpha/\sigma$ in the field of fractions of an integral domain, which is again just the localisation of an integral domain. \\
+
+Now that we have the objects and morphisms in the category $S^{-1}\cat{C}$, we now want to define the composition in this category in a meaningful way. So, let us take two equivalence classes $[\alpha,\sigma],[\beta,\tau]$. So, we would have the following diagram: 
+\begin{center}
+    \begin{tikzpicture}
+        \node (X) at (0,0) {$X$};
+        \node (Y') at (3,2) {$Y'$};
+        \node (Y) at (6,0) {$Y$};
+        \node (Z') at (9,2) {$Z'$};
+        \node (Z) at (12,0) {$Z$};
+
+        \draw[->] (X) -- node[above] {$\alpha$} (Y');
+        \draw[->] (Y) -- node[above] {$\sigma$} (Y');
+        \draw[->] (Y) -- node[above] {$\beta$} (Z');
+        \draw[->] (Z) -- node[above] {$\tau$} (Z');
+
+    \end{tikzpicture}
+\end{center}
+\newpage
+So here, we have a diagram similar to that as in [LF2], where we have $\sigma \in S$, and $\beta$ is an arbitrary morphism in $\cat{C}$, so we can complete it to a diagram as follows:
+
+\begin{center}
+    \begin{tikzpicture}
+        \node (X) at (0,0) {$X$};
+        \node (Y') at (3,2) {$Y'$};
+        \node (Y) at (6,0) {$Y$};
+        \node (Z') at (9,2) {$Z'$};
+        \node (Z) at (12,0) {$Z$};
+        \node (Z'') at (6,4) {$Z''$};
+
+        \draw[->] (X) -- node[above] {$\alpha$} (Y');
+        \draw[->] (Y) -- node[above] {$\sigma$} (Y');
+        \draw[->] (Y) -- node[above] {$\beta$} (Z');
+        \draw[->] (Z) -- node[above] {$\tau$} (Z');
+        \draw[->] (Y') -- node[above] {$\beta'$} (Z'');
+        \draw[->] (Z') -- node[above] {$\sigma'$} (Z'');
+    \end{tikzpicture}
+\end{center}
+
+That is $\exists \sigma'\in S$ and $\beta'\in \cat{C}$ such that the above diagram commutes and thus the composition is defined as follows:
+\[
+[\alpha,\sigma]\circ [\beta,\tau]=[\beta'\alpha,\sigma'\tau]
+\]\\
+The canonical functor $P: \cat{C}\to S^{-1}\cat{C}$ is the identity on objects and sends a morphism $\alpha:X \to Y$ to the class $[\alpha,\text{id}_Y]$\\
+
+\textbf{Example: } Let us take $R$, a commutative ring. Rings can always be viewed as categories with a single object. Let us take a category $\cat{C}$ with a single object, say $\square$. And take Hom$(\square,\square)$=End($\square)=R$, where $R$ is an integral domain, which would allow us to define the composition in $\cat{C}$ to be simply the multiplication in $R$. Let us take $S\subset R$, where $S$ does not contain 0. Then the localised category $S^{-1}\cat{C}$ is simply the category where the object is the same, that is, it has one object, and the Hom set is simply the invertible elements of $S$. So, we have End$_{S^{-1}\cat{C}}(\square)$ to be the set of ``fractions" $[a,b]$, where $b\neq0$. In the case where $S=R -\{0\}$, then End$_{S^{-1}\cat{C}}(\square)$ is basically the field of fractions of $R$. Here, of course, $S$ is admissible, meaning that it admits a calculus of fractions.
+
+ \textbf{Lemma 1.1.1: } \textit{Let $S$ admit a calculus of fractions. Then the functor
+ \[
+ F: S^{-1}\cat{C} \to \cat{C}[S^{-1}]
+ \]
+ which is the identity on objects and which sends the morphism $[\alpha,\sigma]$ to $(Q\sigma)^{-1} \circ Q\alpha$ is an isomorphism}\\
+
+ \textit{Proof: }So we have the functor $Q:\cat{C} \to \cat{C}[S^{-1}]$, and the functor $P: \cat{C}\to S^{-1}\cat{C}$, which inverts all morphisms in $S$, which means that it factors through a new functor $G:\cat{C}[S^{-1}] \to S^{-1}\cat{C}$. This functor sends a morphism $Q\sigma$ to the class $[\sigma,1_Y]$. So, we have $FG(Q\sigma)=F[\sigma,1_Y]=(Q(1_Y)^{-1})\circ Q\sigma=\\1_Y\circ Q\sigma=Q\sigma$
+ 
+ 
+\newpage
+\section*{Exact Categories}
+\textbf{Definition}(Additive Categories): An additive category is a category $\cat{A}$ which satisfies the following properties: 
+\begin{itemize}
+    \item $\cat{A}$ has a zero object, that is, an object which can be either an initial or a terminal object.
+    \item For every pair of objects $A,B$, the Hom set Hom$_\cat{A}(A,B)$ is an abelian group 
+    \item The composition of morphisms is bilinear, in the sense that the operation distributes in the following manner :
+    \[
+    f \circ (g+h)=f\circ g + f \circ h
+    \]
+    \[
+    (f + g) \circ h=f \circ h + g\circ h
+    \]
+    \item $\cat{A}$ admits finite biproducts. When we say biproducts, we mean both products and coproducts. Formally, a product is an object denoted by $A \times B$ together with the epimorphisms $\pi_A:A\times B \to A, \pi_B:A \times B \to B $ with the universal property that if $Z$ is any other object for which there are morphisms, say $f_A, f_B$ from $Z$ to $A$ and $B$ respectively, then there will exist a unique morphism $h: Z \to A \times B$ such that the following diagram commutes:
+
+        
+    \begin{center}
+        \begin{tikzcd}[row sep=huge, column sep=huge]
+  & Z \arrow[ldd, "f_A"', bend right] \arrow[rdd, "f_B", bend left] \arrow[d, "\exists!h", dashed] &   \\
+  & A \times B \arrow[ld, "\pi_A"] \arrow[rd, "\pi_B"']                                            &   \\
+A &                                                                                                & B
+\end{tikzcd}
+    \end{center}
+    That is, $f_A= \pi_A \circ h$ and $f_B =\pi_A \circ h$
+    Similarly, coproduct denoted by $A \coprod B$ is the dual notion of the product, where the epimorphisms become monomorphisms, and the projection becomes the inclusion. And we get that the following diagram commutes
+            \begin{center}
+        \begin{tikzcd}[row sep=huge, column sep=huge]
+    & Z     & \\
+     & A \coprod B\arrow[u, "\exists!h", dashed] & \\
+    A \arrow[ru, "i_A"'] \arrow[ruu, "f_A", bend left] &                & B \arrow[lu, "i_B"] \arrow[luu, "f_B", bend right]
+\end{tikzcd}
+    \end{center}
+    That is $f_A= h \circ i_A$ and $f_B=h \circ i_B$
+\end{itemize}
+\textbf{Short exact sequences: } A sequence of the form 
+\[
+ 0 \xrightarrow{}L \xrightarrow{f}M \xrightarrow{g}N \xrightarrow{}0
+\]
+ in an additive category is called a short exact sequence if
+ $f=\mathrm{ker}(g)$ and $g=\mathrm{coker}(f)$. That is $f \circ g=0$.\\
+
+  While the notion of kernels and cokernels always exist in abelian categories, they may not exist in additive categories.\\
+  As such, short exact sequences themselves may not always exist in additive categories. So we will use the following two examples:\\
+  In the category Proj-$\mathbb{Z}$, that is, the category of projective $\mathbb{Z}$-modules, where the objects are abelian groups, we have the following sequence:
+  \[
+  0 \to \mathbb{Z} \xrightarrow{f} \mathbb{Z}\oplus \mathbb{Z} \xrightarrow{g}\mathbb{Z} \to 0
+   \]
+
+   If we define $f(n)=(n,0)$ and $g(n,m)=n$, then the above sequence is exact and kernels and cokernels exist here. But in the following sequence
+   \[
+   0 \to 2\mathbb{Z} \xrightarrow{f} \mathbb{Z} 
+   \]
+   Here, the cokernel of $f$ is $\mathbb{Z}/2\mathbb{Z}$, which is not projective, so the above sequence cannot be completed to an exact sequence in Proj-$\mathbb{Z}$, and so it is not an abelian category, since the cokernel does not exist for every morphism. 
+\section*{Section 2.5:Grothendieck categories: 14-03-2026}
+\section*{Section 3:Triangulated categories: 24-05-2026}
+\textbf{Recollection: } To recap, a functor $F: \cat{C \to \cat{C}}$ is an equivalence of categories if it is bijective on the Hom sets, that is the map $F : \mathrm{Hom_\cat{C}(X,Y)} \to \mathrm{Hom_\cat{C}(FX,FY)}$ is an injective as well as surjective and for every object $Y \in \cat{C}$,  we have that $FX\cong Y$. In other words $F$ is an equivalence of categories if $F$ is fully faithful and $F$ is essentially surjective.
+
+\subsection{Motivation: }
+
+The motivation for triangulated categories comes form the derived category $\mathcal{D}(\cat{A})$ of an abelian category $\cat{A}$. The derived category of an abelian category is not abelian. but it is additive. That is, for some morphism $f$ between objects $X$ and $Y$, we can complete it to a sequence involving the ``cone" and ``cylinder" of $f$.\\
+This particular sequence gives rise to the concept of a ``triangle" in the category. So we want to generalise this triangle in the derived category to an arbitrary type of category, where we can have a specific class of `objects" called exact or distinguished triangles.\\
+
+Here, the notion of exact sequences does not necessarily exist for an arbitray additive category $\cat{C}$. So, we want to settle for a sequence between an abelian category and an additive category. 
+The triangulated category gives us exactly that.
+\subsection{Definition: } 
+
+Let $\cat{C}$ be an additive category and let $\Sigma$ be an equivalence , or an auto-equivalence rather.\\
+
+A \textit{triangle} is a tuple $(X,Y,Z,f,g,h)$ of the form
+\[
+X\xrightarrow{f} Y\xrightarrow{g}Z\xrightarrow{h} \Sigma X
+\]
+
+This category equipped with the auto-equivalence $\Sigma$ and a class $\epsilon$ of distinguished triangles is called a triangulated category.
+The name triangle makes sense if we represent it in the following manner:
+
+
+\section*{29-04-2026: Localisation of Triangulated Categories 1}
+
+\begin{itemize}
+    \item Localisation needs to be done carefully. We need a subcategory similar to Serre subcategories. We need to ``kill" 
+\end{itemize}
+\end{document}
