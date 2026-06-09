@@ -1,0 +1,49 @@
+Gentle Algebras and its connections to Surface Triangulations and Brauer Graph Algebras.
+
+Chapter 1: Introduction and Preliminaries 
+1.1 Quiver Algebras
+1.2 Bound Quiver Algebras
+1.3 Representation Types
+1.4 Gabriel theorem statement that finite representation type and A,D,E
+1.5 Special Biserial Algebras
+1.5.1 Definition 1.2
+1.5.2 Theorem 1.3 Special Biseral Algebras are of tame representation type: Examples
+
+Chapter 2: Gentle Algebras arising from Surface Triangulations
+(Here we show that using Surface Triangulations we can obtain Gentle Algebras)
+2.1 Definition 3.1
+2.2 Examples
+2.3 Theorem 3.3 (Let's try to prove) Trivial Extension of Gentle Algebra is Special Biserial. 
+2.4 Ribbon Graphs and Gentle Algebras (Construction of Ribbon of a Gentle)
+2.5 Surface Triangulations and Gentle Algebras (Corollary 3.8, Assem, Brustle, ...)
+  
+
+Chapter 3: Brauer Graph Algebras
+(Here we show that using BGAs we can obtain Gentle Algebras and vice versa)
+3.1 Construction and Examples
+3.2 Theorem 2.6 Brauer Graph Algebras are finite dimensional symmetric algebras (Rewrite the proof)
+3.3 Remark 2.7 BGA is indecomposable if and only if its BG is connected (Write the proof)
+3.4 Theorem 2.8 BGAs are special biseral algebras (Try to write)
+3.5 Corollary 2.9 BGAs are of tame representation type (Outline to the proof)
+3.6 Theorem 1.8 Bound quiver algebra is symmetric special biseral algebra if and only if is Brauer Graph Algebra
+3.7 Indecomposable Proj modules of BGA (Something other than Sibylle's example)
+3.8 Ribbon Data on Brauer Graphs 
+3.9  Refer to 2.3  and use the fact that T(A) is special biserial and
+show that BGAs and Gentle Algebras do indeed have a relation. Theorem 3.8
+3.10 What about the converse to the idea in 3.9: Admissible Cuts on BGAs
+
+Chapter 4: Scope and Conclusion
+4.1 Summarise the work in this thesis
+4.2 What about the derived category of Gentle Algebras ?
+4.2.1 Define Derived Category
+4.2.2 May be work a small example
+4.2.3 Explain Derived Equivalence. 
+4.2.4 Use Example 3.23 to show that Triangulations with same parameters results in Derived Equivalence. 
+4.2.5 Theorem 3.20 and 3.21 Understand and prove them. 
+4.2.6 In the future you intend to learn more on the geometric models associated to the module category of Gentle Algebras. 
+
+(Various perspective to Gentle Algebras)
+The triangulation perspective is geometric mostly, surfaces and marked points. 
+BGA perspective is mostly combinatorial, using Brauer Graph Data. 
+
+
