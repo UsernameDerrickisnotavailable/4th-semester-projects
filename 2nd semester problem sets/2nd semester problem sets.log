@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.6.6)  8 JUN 2026 12:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.5.21)  8 JUN 2026 21:00
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"/home/derrick/Documents/github tex files/4th-semester-projects/2nd semester problem sets/2nd semester problem sets.tex"
-(/home/derrick/Documents/github tex files/4th-semester-projects/2nd semester problem sets/2nd semester problem sets.tex
+**"/home/strings/Documents/github tex files/4th-semester-projects/2nd semester problem sets/2nd semester problem sets.tex"
+(/home/strings/Documents/github tex files/4th-semester-projects/2nd semester problem sets/2nd semester problem sets.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
@@ -142,7 +142,7 @@ L3 programming layer <2026-01-19>
  ) 
 Here is how much of TeX's memory you used:
  1712 strings out of 469438
- 24243 string characters out of 5468411
+ 24243 string characters out of 5468410
  440756 words of memory out of 5000000
  30409 multiletter control sequences out of 15000+600000
  636177 words of font info for 73 fonts, out of 8000000 for 9000
